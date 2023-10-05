@@ -46,19 +46,52 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.5s; /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
 
 .movie-card {
     width: 200px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 15px; /* Soft edged border-radius */
     overflow: hidden;
-    transition: transform 0.2s;
+    transform-style: preserve-3d; /* Needed for flip effect */
+    transition: transform 0.5s; /* Extended transition time for smoother flip */
+    perspective: 1000px; /* for 3D flip look */
 }
 
 .movie-card:hover {
-    transform: scale(1.05);
+    transform: rotateY(180deg); /* Flip animation */
+}
+
+.movie-front, .movie-back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-front {
+    background-color: #fff;
+}
+
+.movie-back {
+    transform: rotateY(180deg);
+    background-color: #e9eaed; /* Differentiate the back with a different background */
+    padding: 15px; 
 }
 
 .movie-poster {
@@ -85,4 +118,4 @@ body {
     .movie-card {
         width: 100%;
     }
-} 
+}
