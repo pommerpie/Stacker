@@ -5,15 +5,27 @@ var movieNight = 'https://streaming-availability.p.rapidapi.com/search/title?cou
 $('#search').on('click', search)
 $('.addMovie').on('click', addItem)
 
-function search (event) {
-    event.preventDefault()
-    // var userSearch = $("input[name='search']")
+search()
+function search () {
     fetch(movieNight)
     .then(function (response){
         return response.json()
     })
     .then(function(data){
         console.log(data)
+        for (i=0; i<30; i++) {
+            var title = data.result[i].title
+            var mediaType = data.result[i].type
+            var releaseDate = data.result[i].firstAirYear
+            var recentDate = data.result[i].lastAirYear
+            var genreFirst = data.result[i].genres[0].name
+            var genreSecond = data.result[i].genres[1].name
+            var creators = data.result[i].creators
+            var creatorFirst = creators.slice(0, 1)
+            var creatorSecond = creators.slice(1)
+
+
+        }
     })
 }
 
@@ -34,10 +46,15 @@ function addItem () {
         var creators = data.result[1].creators
         var creatorFirst = creators.slice(0, 1)
         var creatorSecond = creators.slice(1)
-        $('.movie-back').append(title)
-        $('.movie-back').append(mediaType)
-        $('.movie-back').append(releaseDate + ' ' + recentDate)
-        $('.movie-back').append(genreFirst + ' ' + genreSecond)
-        $('.movie-back').append(creatorFirst + ' ' + creatorSecond)
+
+        if (releaseDate === recentDate) {
+            recentDate = ''
+        }
+
+        $('.movie-back').append('<li>' + title + '</li>')
+        $('.movie-back').append('<li>' + mediaType + '</li>')
+        $('.movie-back').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
+        $('.movie-back').append('<li>' + genreFirst + ' ' + genreSecond + '</li>')
+        $('.movie-back').append('<li>' + creatorFirst + ' ' + creatorSecond + '</li>')
     })
 }
