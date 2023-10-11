@@ -5,148 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group 4 Project 1</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="/style.css">
-    <!--Link CSS Here -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header class="hero">
-        <h1> Group 4 Project 1</h1>
-    </header>
-
-    <main>
-        <div class="topnav">
-            <a class="most-watched" href="#home">Most Watched</a>
-            <a class="trending" href="#home">Trending</a>
-            <input type="text" placeholder="Search...">
-
-        </div>
-
-    <h2 class="most-watched" alt="most watched">Most Watched</h2>
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="Movie Name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Group 4 Project 1</h1>
             </div>
         </div>
-    </div>
-
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
+    </section>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="#home">Most Watched</a>
+                <a class="navbar-item" href="#home">Trending</a>
             </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
-            </div>
-        </div>
-        
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <input class="input" type="text" placeholder="Search..." id="movieSearchInput">
+                        </p>
+                        <p class="control">
+                            <button class="button" id="search">Search</button>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <h2 class="subtitle is-4 has-text-centered">Most Watched</h2>
+            <div class="columns is-multiline">
+                <!-- Repeat for each movie card -->
+                <div class="column is-one-quarter">
+                    <div class="movie-card">
+                        <div class="movie-front">
+                            <img src="path_to_movie_image.jpg" alt="Movie Name" class="movie-poster">
+                            <h3 class="movie-title">Movie Title</h3>
+                        </div>
+                        <div class="movie-back">
+                            <p><strong>Director:</strong> Director's Name</p>
+                            <p><strong>Release Date:</strong> Date</p>
+                            <p><strong>Genre:</strong> Action, Drama</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
-            </div>
-        </div>
-        
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
-            </div>
-        </div>
-    
-    <h2 class="trending" alt="trending">Trending</h2>   
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
-            </div>
-        </div>
-        
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie Name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
+            <h2 class="subtitle is-4 has-text-centered">Trending</h2>
+            <div class="columns is-multiline">
+                <!-- Repeat for each movie card -->
+                <div class="column is-one-quarter">
+                    <div class="movie-card">
+                        <div class="movie-front">
+                            <img src="path_to_movie_image.jpg" alt="Movie Name" class="movie-poster">
+                            <h3 class="movie-title">Movie Title</h3>
+                        </div>
+                        <div class="movie-back">
+                            <p><strong>Director:</strong> Director's Name</p>
+                            <p><strong>Release Date:</strong> Date</p>
+                            <p><strong>Genre:</strong> Action, Drama</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie Name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
-            </div>
-        </div>
-        
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie Name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
-            </div>
-        </div>
-        
-        <div class="movie-card">
-            <div class="movie-front">
-                <img src="path_to_movie_image.jpg" alt="movie Name" class="movie-poster">
-                <h3 class="movie-title">Movie Title</h3>
-            </div>
-            <div class="movie-back">
-                <p><strong>Director:</strong> Director's Name</p>
-                <p><strong>Release Date:</strong> Date</p>
-                <p><strong>Genre:</strong> Action, Drama</p>
-            </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"> </script>
-        <script src="script.js"></script>
-    </main>
-    
+    </section>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
 </body>
-</html> 
+</html>
