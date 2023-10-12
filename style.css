@@ -15,6 +15,17 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+.header-container {
+    max-width: 1200px;
+    padding: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.header-container h1 {
+    padding-left: 25px;
+    font-size: 50px;
+}
 .header {
     background-color: #FFFFFF;
     color: #fff;
@@ -118,25 +129,25 @@ body {
 .film-strip {
     background: repeating-linear-gradient(
         to bottom,
-        #000,
-        #FFFFFF 5px,
-        #000000 5px,
+        #a8a8a8,
+        #FFFFFF 7px,
+        #a8a8a8 5px,
         #fff 5px,
-        #000000 5px,
+        #a8a8a8 5px,
         #FFFFFF 5px
     );
     border: 1px solid #000;
-    color: #FFFFFF;
+    color: #000000;
     font-weight: bold;
 }
 .film-strip-button {
     background: repeating-linear-gradient(
         to bottom,
-        #000,
-        #FFFFFF 5px,
-        #000000 5px,
+        #a8a8a8,
+        #FFFFFF 7px,
+        #a8a8a8 5px,
         #fff 5px,
-        #000000 5px,
+        #a8a8a8 5px,
         #FFFFFF 5px
     );
     border: 1px solid #000;
