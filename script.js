@@ -25,47 +25,48 @@ function search () {
             if (data.result[i].type == 'movie') {
                 
             var title = data.result[i].title
-            var mediaType = data.result[i].type
-            var releaseDate = data.result[i].year
-            var genreFirst = data.result[i].genres[0]
-            var genreSecond = data.result[i].genres[1]
-            var directors = data.result[i].directors
-            var director = directors.slice(0, 1)
+            // var mediaType = data.result[i].type
+            // var releaseDate = data.result[i].year
+            // var genreFirst = data.result[i].genres[0]
+            // var genreSecond = data.result[i].genres[1]
+            // var directors = data.result[i].directors
+            // var director = directors.slice(0, 1)
 
-            console.log('title', title)
-            console.log('type', mediaType)
-            console.log('year', releaseDate)
-            console.log('first genre', genreFirst)
-            console.log('second genre', genreSecond)
-            console.log('director', director)
+            // console.log('title', title)
+            // console.log('type', mediaType)
+            // console.log('year', releaseDate)
+            // console.log('first genre', genreFirst)
+            // console.log('second genre', genreSecond)
+            // console.log('director', director)
             }
 
             if (data.result[i].type == 'series') {
 
             var title = data.result[i].title
-            var mediaType = data.result[i].type
-            var releaseDate = data.result[i].firstAirYear
-            var recentDate = data.result[i].lastAirYear
-            var genreFirst = data.result[i].genres[0]
-            var genreSecond = data.result[i].genres[1]
-            var creators = data.result[i].creators
-            var creatorFirst = creators.slice(0, 1)
-            var creatorSecond = creators.slice(1)
+            // var mediaType = data.result[i].type
+            // var releaseDate = data.result[i].firstAirYear
+            // var recentDate = data.result[i].lastAirYear
+            // var genreFirst = data.result[i].genres[0]
+            // var genreSecond = data.result[i].genres[1]
+            // var creators = data.result[i].creators
+            // var creatorFirst = creators.slice(0, 1)
+            // var creatorSecond = creators.slice(1)
 
-            console.log('title', title)
-            console.log('type', mediaType)
-            console.log('released',releaseDate)
-            console.log('last', recentDate)
-            console.log('first genre', genreFirst)
-            console.log('second genre', genreSecond)
-            console.log('creator 1', creatorFirst)
-            console.log('creator 2', creatorSecond)
+            // console.log('title', title)
+            // console.log('type', mediaType)
+            // console.log('released',releaseDate)
+            // console.log('last', recentDate)
+            // console.log('first genre', genreFirst)
+            // console.log('second genre', genreSecond)
+            // console.log('creator 1', creatorFirst)
+            // console.log('creator 2', creatorSecond)
                 
             }
         // if (releaseDate === recentDate) {
         //     recentDate = ''
         // }
         
+        $('#searchList').append('<div class="columns is-multiline"><div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front"><h3 class="movie-title">' + title + '</h3></div></div></div></div>')
         // $('#searchList').append('<div class="column is-one-quarter"></div>')
             // $('#searchList').children().append('<div class="movie-card"></div>')
                 // $('#searchList').children().children().append('<div class="movie-front"></div>')
