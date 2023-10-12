@@ -7,6 +7,8 @@ $('#search').on('click', search)
 
 // search()
 function search () {
+    $('#searchList').empty()
+
     var userSearch = $('input[name="movieSearchInput"]').val()
     var movieNight = 'https://streaming-availability.p.rapidapi.com/search/title?country=us&show_type=all&output-language=en&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&title=' + userSearch
 
@@ -15,7 +17,7 @@ function search () {
         return response.json()
     })
     .then(function(data){
-        console.log(data.result)
+        // console.log(data.result)
 
         if ($('input[name="movieSearchInput"]').val() != '') {
         $('#searchList').removeAttr('hidden')
@@ -28,8 +30,8 @@ function search () {
             var title = data.result[i].title
             var mediaType = data.result[i].type
             var releaseDate = data.result[i].year
-            var genreFirst = data.result[i].genres[0]
-            var genreSecond = data.result[i].genres[1]
+            var genreFirst = data.result[i].genres[0].name
+            var genreSecond = data.result[i].genres[1].name
             var directors = data.result[i].directors
             var director = directors.slice(0, 1)
 
@@ -48,8 +50,8 @@ function search () {
             var mediaType = data.result[i].type
             var releaseDate = data.result[i].firstAirYear
             var recentDate = data.result[i].lastAirYear
-            var genreFirst = data.result[i].genres[0]
-            var genreSecond = data.result[i].genres[1]
+            var genreFirst = data.result[i].genres[0].name
+            var genreSecond = data.result[i].genres[1].name
             var creators = data.result[i].creators
             var creatorFirst = creators.slice(0, 1)
             var creatorSecond = creators.slice(1)
@@ -72,12 +74,15 @@ function search () {
         $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front"><h3 class="movie-title">' + title + '</h3></div><ul class="movie-back" id="' + movieCardID + '"></ul></div></div>')
         $('[id*="' + movieCardID + '"]').append('<li>' + mediaType + '</li>')
         $('[id*="' + movieCardID + '"]').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
-        $('[id*="' + movieCardID + '"]').append('<li>' + genreFirst + ' ' + genreSecond + '</li>')
-        if (mediaType == 'movie') {
+        $('[id*="' + movieCardID + '"]').append('<li>' + genreFirst + '/' + genreSecond + '</li>')
+        if (mediaType == 'movie' && director) {
             $('[id*="' + movieCardID + '"]').append('<li>' + director + '</li>')
-        } else         $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + ' ' + creatorSecond + '</li>')
-
-        }
+        } else if (creatorFirst && ! creatorSecond == '') {
+            $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + '</li>') 
+        } else if (creatorFirst && creatorSecond) {
+            $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + '/' + creatorSecond + '</li>')
+        } else $('[id*="' + movieCardID + '"]').append('<li>N/A</li>')
+    }
     })
 }
 
