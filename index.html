@@ -18,14 +18,14 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="#home">Most Watched</a>
-                <a class="navbar-item" href="#home">Trending</a>
+                <a class="navbar-item" href="#most-watched">Most Watched</a>
+                <a class="navbar-item" href="#trending">Trending</a>
             </div>
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="field has-addons">
                         <p class="control">
-                            <input class="input film-strip" type="text" placeholder="Search..." id="movieSearchInput">
+                            <input class="input film-strip" type="text" placeholder="Search..." id="movieSearchInput" name="movieSearchInput">
                         </p>
                         <p class="control">
                             <button class="button film-strip-button" id="search">Search</button>
@@ -36,8 +36,15 @@
         </div>
     </nav>
 <section class="section">
+    <div class="container" id="searchList" hidden>
+        <h2 class="subtitle is-4 has-text-centered" >Results Found</h2>
+    </div>
+</section>
+
+<section class="section">
         <div class="container">
-            <h2 class="subtitle is-4 has-text-centered">Most Watched</h2>
+
+            <h2 class="subtitle is-4 has-text-centered" id="most-watched">Most Watched</h2>
             <div class="columns is-multiline">
                 <!-- Movie Card 1-10 for Most Watched -->
                 <!-- Card 1 -->
@@ -153,7 +160,8 @@
                     </div>
                 </div>
             </div>
-<h2 class="subtitle is-4 has-text-centered">Trending</h2>
+
+            <h2 class="subtitle is-4 has-text-centered" id="trending">Trending</h2>
             <div class="columns is-multiline">
                 <div class="column is-one-quarter">
                     <div class="movie-card">
