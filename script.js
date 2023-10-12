@@ -23,14 +23,15 @@ function search () {
         for (let i=0; i<data.result.length; i++) {
             // console.log('data', data.result[i])
             if (data.result[i].type == 'movie') {
-                
+
+            var movieCardID = 'movie' + [i]    
             var title = data.result[i].title
-            // var mediaType = data.result[i].type
-            // var releaseDate = data.result[i].year
-            // var genreFirst = data.result[i].genres[0]
-            // var genreSecond = data.result[i].genres[1]
-            // var directors = data.result[i].directors
-            // var director = directors.slice(0, 1)
+            var mediaType = data.result[i].type
+            var releaseDate = data.result[i].year
+            var genreFirst = data.result[i].genres[0]
+            var genreSecond = data.result[i].genres[1]
+            var directors = data.result[i].directors
+            var director = directors.slice(0, 1)
 
             // console.log('title', title)
             // console.log('type', mediaType)
@@ -42,15 +43,16 @@ function search () {
 
             if (data.result[i].type == 'series') {
 
+            var movieCardID = 'series' + [i]
             var title = data.result[i].title
-            // var mediaType = data.result[i].type
-            // var releaseDate = data.result[i].firstAirYear
-            // var recentDate = data.result[i].lastAirYear
-            // var genreFirst = data.result[i].genres[0]
-            // var genreSecond = data.result[i].genres[1]
-            // var creators = data.result[i].creators
-            // var creatorFirst = creators.slice(0, 1)
-            // var creatorSecond = creators.slice(1)
+            var mediaType = data.result[i].type
+            var releaseDate = data.result[i].firstAirYear
+            var recentDate = data.result[i].lastAirYear
+            var genreFirst = data.result[i].genres[0]
+            var genreSecond = data.result[i].genres[1]
+            var creators = data.result[i].creators
+            var creatorFirst = creators.slice(0, 1)
+            var creatorSecond = creators.slice(1)
 
             // console.log('title', title)
             // console.log('type', mediaType)
@@ -62,20 +64,19 @@ function search () {
             // console.log('creator 2', creatorSecond)
                 
             }
-        // if (releaseDate === recentDate) {
-        //     recentDate = ''
-        // }
+        if (releaseDate === recentDate || mediaType == 'movie') {
+            recentDate = ''
+        }
         
-        $('#searchList').append('<div class="columns is-multiline"><div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front"><h3 class="movie-title">' + title + '</h3></div></div></div></div>')
-        // $('#searchList').append('<div class="column is-one-quarter"></div>')
-            // $('#searchList').children().append('<div class="movie-card"></div>')
-                // $('#searchList').children().children().append('<div class="movie-front"></div>')
-                    // $('searchList').children().children().children().append('<h3 class="movie-title>' + title + '</h3>')
-        // $('.movie-back').append('<li>' + title + '</li>')
-        // $('.movie-back').append('<li>' + mediaType + '</li>')
-        // $('.movie-back').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
-        // $('.movie-back').append('<li>' + genreFirst + ' ' + genreSecond + '</li>')
-        // $('.movie-back').append('<li>' + creatorFirst + ' ' + creatorSecond + '</li>')
+        $('#searchList').append('<div class="columns is-multiline" id="cardDeck"></div>')
+        $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front"><h3 class="movie-title">' + title + '</h3></div><ul class="movie-back" id="' + movieCardID + '"></ul></div></div>')
+        $('[id*="' + movieCardID + '"]').append('<li>' + mediaType + '</li>')
+        $('[id*="' + movieCardID + '"]').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
+        $('[id*="' + movieCardID + '"]').append('<li>' + genreFirst + ' ' + genreSecond + '</li>')
+        if (mediaType == 'movie') {
+            $('[id*="' + movieCardID + '"]').append('<li>' + director + '</li>')
+        } else         $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + ' ' + creatorSecond + '</li>')
+
         }
     })
 }
