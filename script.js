@@ -1,32 +1,26 @@
-// var userSearch = 'Small Soldiers'
-
-// var movieNight = 'https://streaming-availability.p.rapidapi.com/search/title?country=us&show_type=all&output-language=en&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&title=' + userSearch
-
 $('#search').on('click', search)
-// $('.addMovie').on('click', addItem)
+$('#addMovie').on('click', addItem)
 
-// search()
 function search () {
     $('#searchList').empty()
-
     var userSearch = $('input[name="movieSearchInput"]').val()
-    var movieNight = 'https://streaming-availability.p.rapidapi.com/search/title?country=us&show_type=all&output-language=en&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&title=' + userSearch
+
+    const movieNight = 'https://streaming-availability.p.rapidapi.com/search/title?country=us&show_type=all&output-language=en&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&title=' + userSearch
+    const tmdb = 'https://api.themoviedb.org/3/search/multi?api_key=c8db29e99207bfce5e4cc0e7cd218be2&per_page=50&query=' + userSearch
 
     fetch(movieNight)
     .then(function (response){
         return response.json()
     })
     .then(function(data){
-        // console.log(data.result)
 
         if ($('input[name="movieSearchInput"]').val() != '') {
         $('#searchList').removeAttr('hidden')
         }
         for (let i=0; i<data.result.length; i++) {
-            // console.log('data', data.result[i])
             if (data.result[i].type == 'movie') {
-
-            var movieCardID = 'movie' + [i]    
+            var cardFrontID = 'cardF' + [i]
+            var cardBackID = 'cardB' + [i]    
             var title = data.result[i].title
             var mediaType = data.result[i].type
             var releaseDate = data.result[i].year
@@ -34,18 +28,11 @@ function search () {
             var genreSecond = data.result[i].genres[1].name
             var directors = data.result[i].directors
             var director = directors.slice(0, 1)
-
-            // console.log('title', title)
-            // console.log('type', mediaType)
-            // console.log('year', releaseDate)
-            // console.log('first genre', genreFirst)
-            // console.log('second genre', genreSecond)
-            // console.log('director', director)
             }
 
             if (data.result[i].type == 'series') {
-
-            var movieCardID = 'series' + [i]
+            var cardFrontID = 'cardF' + [i]    
+            var cardBackID = 'cardB' + [i]
             var title = data.result[i].title
             var mediaType = data.result[i].type
             var releaseDate = data.result[i].firstAirYear
@@ -55,63 +42,59 @@ function search () {
             var creators = data.result[i].creators
             var creatorFirst = creators.slice(0, 1)
             var creatorSecond = creators.slice(1)
-
-            // console.log('title', title)
-            // console.log('type', mediaType)
-            // console.log('released',releaseDate)
-            // console.log('last', recentDate)
-            // console.log('first genre', genreFirst)
-            // console.log('second genre', genreSecond)
-            // console.log('creator 1', creatorFirst)
-            // console.log('creator 2', creatorSecond)
-                
             }
         if (releaseDate === recentDate || mediaType == 'movie') {
             recentDate = ''
         }
         
+        var cardID = title.replace(/\s+/g, '')
         $('#searchList').append('<div class="columns is-multiline" id="cardDeck"></div>')
-        $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front"><h3 class="movie-title">' + title + '</h3></div><ul class="movie-back" id="' + movieCardID + '"></ul></div></div>')
-        $('[id*="' + movieCardID + '"]').append('<li>' + mediaType + '</li>')
-        $('[id*="' + movieCardID + '"]').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
-        $('[id*="' + movieCardID + '"]').append('<li>' + genreFirst + '/' + genreSecond + '</li>')
+        $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card" id="' + cardID + '"><div class="movie-front" id="' + cardFrontID + '"><h3 class="movie-title">' + title + '</h3><button class="button" id="addMovie">+</button></div><ul class="movie-back" id="' + cardBackID + '"></ul></div></div>')
+        $('[id*="' + cardBackID + '"]').append('<li>' + mediaType + '</li>')
+        $('[id*="' + cardBackID + '"]').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
+        $('[id*="' + cardBackID + '"]').append('<li>' + genreFirst + '/' + genreSecond + '</li>')
         if (mediaType == 'movie' && director) {
-            $('[id*="' + movieCardID + '"]').append('<li>' + director + '</li>')
+            $('[id*="' + cardBackID + '"]').append('<li>' + director + '</li>')
         } else if (creatorFirst && ! creatorSecond == '') {
-            $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + '</li>') 
+            $('[id*="' + cardBackID + '"]').append('<li>' + creatorFirst + '</li>') 
         } else if (creatorFirst && creatorSecond) {
-            $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + '/' + creatorSecond + '</li>')
-        } else $('[id*="' + movieCardID + '"]').append('<li>N/A</li>')
+            $('[id*="' + cardBackID + '"]').append('<li>' + creatorFirst + '/' + creatorSecond + '</li>')
+        } else $('[id*="' + cardBackID + '"]').append('<li>N/A</li>')
     }
     })
 }
 
-// addItem()
-// function addItem () {
-//     fetch(movieNight)
-//     .then(function (response){
+function addItem(){
+    var userAdd = this.parentNode.parentNode.getAttribute('id')
+    console.log(userAdd)
+    let listItem = $('[id*="' + userAdd + '"]').html()
+    console.log(listItem)
+}
+
+// var staticSearch = 'spiderman'
+
+// var watchMode = 'https://watchmode.p.rapidapi.com/autocomplete-search/?search_type=1&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&s&search_value=' + staticSearch
+// var tmdb = 'https://api.themoviedb.org/3/search/multi?api_key=c8db29e99207bfce5e4cc0e7cd218be2&per_page=50&query=' + staticSearch 
+
+// function tmdbSearch () {
+//     fetch(tmdb)
+//     .then(function(response){
 //         return response.json()
 //     })
 //     .then(function(data){
 //         console.log(data)
-//         var title = data.result[1].title
-//         var mediaType = data.result[1].type
-//         var releaseDate = data.result[1].firstAirYear
-//         var recentDate = data.result[1].lastAirYear
-//         var genreFirst = data.result[1].genres[0].name
-//         var genreSecond = data.result[1].genres[1].name
-//         var creators = data.result[1].directors
-//         var creatorFirst = creators.slice(0, 1)
-//         var creatorSecond = creators.slice(1)
-
-//         if (releaseDate === recentDate) {
-//             recentDate = ''
-//         }
-
-//         $('.movie-back').append('<li>' + title + '</li>')
-//         $('.movie-back').append('<li>' + mediaType + '</li>')
-//         $('.movie-back').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
-//         $('.movie-back').append('<li>' + genreFirst + ' ' + genreSecond + '</li>')
-//         $('.movie-back').append('<li>' + creatorFirst + ' ' + creatorSecond + '</li>')
 //     })
 // }
+
+// function watchSearch () {
+//     fetch(watchMode)
+//     .then(function(response){
+//         return response.json()
+//     })
+//     .then(function(data){
+//         console.log(data)
+//     })
+// }
+
+// tmdbSearch()
+// watchSearch()

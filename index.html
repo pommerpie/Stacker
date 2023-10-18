@@ -37,6 +37,7 @@
             </div>
         </div>
     </nav>
+
 <section class="section">
     <div class="container" id="searchList" hidden>
         <h2 class="subtitle is-4 has-text-centered" >Results Found</h2>
@@ -50,10 +51,11 @@
                 <!-- Movie Card 1-10 for Most Watched -->
                 <!-- Card 1 -->
                 <div class="column is-one-quarter">
-                    <div class="movie-card">
+                    <div class="movie-card" id="arbitrary">
                         <div class="movie-front">
                             <img src="path_to_movie_image1.jpg" alt="Movie Name 1" class="movie-poster">
                             <h3 class="movie-title">Movie Title 1</h3>
+                            <button class="button" id="addMovie">+</button>
                         </div>
                         <div class="movie-back">
                             <p><strong>Director:</strong> Director's Name 1</p>
@@ -270,6 +272,13 @@
             </div>
         </div>
     </section>
+
+<section class="section">
+    <div class="container" id="myList" hidden>
+        <h2 class="subtitle is-4 has-text-centered" >My Watch List</h2>
+    </div>
+</section>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
 </body>
