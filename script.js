@@ -1,16 +1,30 @@
-var staticSearch = 'Star wars'
+// var staticSearch = 'spiderman'
 
-// var mdb = 'https://mdblist.p.rapidapi.com/?rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&s=' + staticSearch
+// var watchMode = 'https://watchmode.p.rapidapi.com/autocomplete-search/?search_type=1&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&s&search_value=' + staticSearch
+// var tmdb = 'https://api.themoviedb.org/3/search/multi?api_key=c8db29e99207bfce5e4cc0e7cd218be2&per_page=50&query=' + staticSearch 
 
-function ratingSearch () {
-    fetch(mdb)
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data)
-    })
-}
+// function tmdbSearch () {
+//     fetch(tmdb)
+//     .then(function(response){
+//         return response.json()
+//     })
+//     .then(function(data){
+//         console.log(data)
+//     })
+// }
+
+// function watchSearch () {
+//     fetch(watchMode)
+//     .then(function(response){
+//         return response.json()
+//     })
+//     .then(function(data){
+//         console.log(data)
+//     })
+// }
+
+// tmdbSearch()
+// watchSearch()
 
 $('#search').on('click', search)
 // $('.addMovie').on('click', addItem)
@@ -18,16 +32,17 @@ $('#search').on('click', search)
 // search()
 function search () {
     $('#searchList').empty()
-
     var userSearch = $('input[name="movieSearchInput"]').val()
-    var movieNight = 'https://streaming-availability.p.rapidapi.com/search/title?country=us&show_type=all&output-language=en&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&title=' + userSearch
+
+    const movieNight = 'https://streaming-availability.p.rapidapi.com/search/title?country=us&show_type=all&output-language=en&rapidapi-key=ab82a71388mshb670a9456117badp107e60jsn596c04ae7f2f&title=' + userSearch
+    const tmdb = 'https://api.themoviedb.org/3/search/multi?api_key=c8db29e99207bfce5e4cc0e7cd218be2&per_page=50&query=' + userSearch
 
     fetch(movieNight)
     .then(function (response){
         return response.json()
     })
     .then(function(data){
-        // console.log(data.result)
+        console.log(data.result)
 
         if ($('input[name="movieSearchInput"]').val() != '') {
         $('#searchList').removeAttr('hidden')
@@ -35,8 +50,8 @@ function search () {
         for (let i=0; i<data.result.length; i++) {
             // console.log('data', data.result[i])
             if (data.result[i].type == 'movie') {
-
-            var movieCardID = 'movie' + [i]    
+            var cardFrontID = 'cardF' + [i]
+            var cardBackID = 'cardB' + [i]    
             var title = data.result[i].title
             var mediaType = data.result[i].type
             var releaseDate = data.result[i].year
@@ -44,7 +59,6 @@ function search () {
             var genreSecond = data.result[i].genres[1].name
             var directors = data.result[i].directors
             var director = directors.slice(0, 1)
-
             // console.log('title', title)
             // console.log('type', mediaType)
             // console.log('year', releaseDate)
@@ -54,8 +68,8 @@ function search () {
             }
 
             if (data.result[i].type == 'series') {
-
-            var movieCardID = 'series' + [i]
+            var cardFrontID = 'cardF' + [i]    
+            var cardBackID = 'cardB' + [i]
             var title = data.result[i].title
             var mediaType = data.result[i].type
             var releaseDate = data.result[i].firstAirYear
@@ -65,7 +79,6 @@ function search () {
             var creators = data.result[i].creators
             var creatorFirst = creators.slice(0, 1)
             var creatorSecond = creators.slice(1)
-
             // console.log('title', title)
             // console.log('type', mediaType)
             // console.log('released',releaseDate)
@@ -81,19 +94,27 @@ function search () {
         }
         
         $('#searchList').append('<div class="columns is-multiline" id="cardDeck"></div>')
-        $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front"><h3 class="movie-title">' + title + '</h3></div><ul class="movie-back" id="' + movieCardID + '"></ul></div></div>')
-        $('[id*="' + movieCardID + '"]').append('<li>' + mediaType + '</li>')
-        $('[id*="' + movieCardID + '"]').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
-        $('[id*="' + movieCardID + '"]').append('<li>' + genreFirst + '/' + genreSecond + '</li>')
+        $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front" id="' + cardFrontID + '"><h3 class="movie-title">' + title + '</h3></div><ul class="movie-back" id="' + cardBackID + '"></ul><button type="button" id="addMovie">+</button></div></div>')
+        $('[id*="' + cardBackID + '"]').append('<li>' + mediaType + '</li>')
+        $('[id*="' + cardBackID + '"]').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
+        $('[id*="' + cardBackID + '"]').append('<li>' + genreFirst + '/' + genreSecond + '</li>')
         if (mediaType == 'movie' && director) {
-            $('[id*="' + movieCardID + '"]').append('<li>' + director + '</li>')
+            $('[id*="' + cardBackID + '"]').append('<li>' + director + '</li>')
         } else if (creatorFirst && ! creatorSecond == '') {
-            $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + '</li>') 
+            $('[id*="' + cardBackID + '"]').append('<li>' + creatorFirst + '</li>') 
         } else if (creatorFirst && creatorSecond) {
-            $('[id*="' + movieCardID + '"]').append('<li>' + creatorFirst + '/' + creatorSecond + '</li>')
-        } else $('[id*="' + movieCardID + '"]').append('<li>N/A</li>')
+            $('[id*="' + cardBackID + '"]').append('<li>' + creatorFirst + '/' + creatorSecond + '</li>')
+        } else $('[id*="' + cardBackID + '"]').append('<li>N/A</li>')
     }
     })
+    
+    // fetch(tmdb)
+    // .then(function(response){
+    //     return response.json()
+    // })
+    // .then(function(data){
+    //     console.log(data)
+    // })
 }
 
 // addItem()
