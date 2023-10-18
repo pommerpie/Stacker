@@ -27,7 +27,7 @@
 // watchSearch()
 
 $('#search').on('click', search)
-// $('.addMovie').on('click', addItem)
+$('#addMovie').on('click', addItem)
 
 // search()
 function search () {
@@ -93,8 +93,9 @@ function search () {
             recentDate = ''
         }
         
+        var cardID = title.replace(/\s+/g, '')
         $('#searchList').append('<div class="columns is-multiline" id="cardDeck"></div>')
-        $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card"><div class="movie-front" id="' + cardFrontID + '"><h3 class="movie-title">' + title + '</h3></div><ul class="movie-back" id="' + cardBackID + '"></ul><button type="button" id="addMovie">+</button></div></div>')
+        $('#cardDeck').append('<div class ="column is-one-quarter"><div class ="movie-card" id="' + cardID + '"><button type="button" id="addMovie">+</button><div class="movie-front" id="' + cardFrontID + '"><h3 class="movie-title">' + title + '</h3></div><ul class="movie-back" id="' + cardBackID + '"></ul></div></div>')
         $('[id*="' + cardBackID + '"]').append('<li>' + mediaType + '</li>')
         $('[id*="' + cardBackID + '"]').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
         $('[id*="' + cardBackID + '"]').append('<li>' + genreFirst + '/' + genreSecond + '</li>')
@@ -117,32 +118,7 @@ function search () {
     // })
 }
 
-// addItem()
-// function addItem () {
-//     fetch(movieNight)
-//     .then(function (response){
-//         return response.json()
-//     })
-//     .then(function(data){
-//         console.log(data)
-//         var title = data.result[1].title
-//         var mediaType = data.result[1].type
-//         var releaseDate = data.result[1].firstAirYear
-//         var recentDate = data.result[1].lastAirYear
-//         var genreFirst = data.result[1].genres[0].name
-//         var genreSecond = data.result[1].genres[1].name
-//         var creators = data.result[1].directors
-//         var creatorFirst = creators.slice(0, 1)
-//         var creatorSecond = creators.slice(1)
-
-//         if (releaseDate === recentDate) {
-//             recentDate = ''
-//         }
-
-//         $('.movie-back').append('<li>' + title + '</li>')
-//         $('.movie-back').append('<li>' + mediaType + '</li>')
-//         $('.movie-back').append('<li>' + releaseDate + ' ' + recentDate + '</li>')
-//         $('.movie-back').append('<li>' + genreFirst + ' ' + genreSecond + '</li>')
-//         $('.movie-back').append('<li>' + creatorFirst + ' ' + creatorSecond + '</li>')
-//     })
-// }
+function addItem(){
+    var userAdd = this.parentNode.parentNode.getAttribute('id')
+    console.log(userAdd)
+}
